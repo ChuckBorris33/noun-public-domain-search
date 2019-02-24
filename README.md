@@ -14,7 +14,7 @@ pip-sync
 ```
 
 ### Setup api keys
-Get your api keys at "<https://thenounproject.com/developers/>" and edit lines:
+Get your api keys at <https://thenounproject.com/developers/> and edit lines:
 ```
 export NOUN_KEY="YOUR_KEY_HERE"
 export NOUN_SECRET="YOUR_SECRET_HERE"
