@@ -1,8 +1,10 @@
 {
-  "name": "noun-search",
-  "version": "0.1.0",
-  "private": true,
+  "name": "nnoun-public-domain-search",
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
   "scripts": {
+    "backend": "bash backend/run_backend_secret.sh",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
