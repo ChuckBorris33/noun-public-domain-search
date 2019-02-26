@@ -49,7 +49,7 @@ export default {
       this.iconList = [];
       debounce(
         this.axios
-          .get(`/api/search_icons/${this.searchString}`)
+          .get(`/api/search_icons/${encodeURIComponent(this.searchString)}`)
           .then(response => {
             this.iconList = response.data.icons;
             this.loading = false;
