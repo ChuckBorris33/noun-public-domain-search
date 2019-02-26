@@ -18,5 +18,8 @@ BASE_URL = "http://api.thenounproject.com"
 @app.route('/api/search_icons/<string:term>', methods=['GET'])
 def search_icons(term):
     endpoint = f"{BASE_URL}/icons/{term}"  
-    response = requests.get(endpoint, auth=auth)
+    params = {
+      'limit_to_public_domain': 1
+    }
+    response = requests.get(endpoint, auth=auth, params=params)
     return Response(response.content, mimetype='application/json')
