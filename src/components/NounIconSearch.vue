@@ -7,15 +7,7 @@
       <SearchInput v-model="searchString" :loading="loading" />
       <v-container fluid grid-list-xl>
         <v-layout row wrap>
-          <v-flex v-for="i in 6" :key="i" xs4>
-            <img
-              src="https://bit.ly/2GCP5tO"
-              class="image"
-              alt="lorem"
-              width="100%"
-              height="100%"
-            />
-          </v-flex>
+          <IconCard v-for="icon in iconList" :key="icon.id" :iconData="icon" />
         </v-layout>
       </v-container>
     </v-layout>
@@ -26,11 +18,13 @@
 import debounce from "debounce";
 
 import SearchInput from "./SearchInput";
+import IconCard from "./IconCard";
 
 export default {
   name: "NounIconSearch",
   components: {
-    SearchInput
+    SearchInput,
+    IconCard
   },
   data() {
     return {
@@ -52,6 +46,7 @@ export default {
   methods: {
     getIconList() {
       this.loading = true;
+      this.iconList = [];
       debounce(
         this.axios
           .get(`/api/search_icons/${this.searchString}`)
