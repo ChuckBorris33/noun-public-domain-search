@@ -3,8 +3,10 @@
     <v-text-field
       v-model="searchString"
       prepend-inner-icon="search"
+      placeholder="Enter search term"
       outline
       single-line
+      hide-details
     >
       <v-progress-circular
         v-show="loading"

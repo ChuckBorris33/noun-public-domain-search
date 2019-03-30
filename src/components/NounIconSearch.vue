@@ -1,35 +1,59 @@
 <template>
-  <v-container class="noun-search">
-    <v-layout row wrap>
-      <v-flex xs12 text-xs-center my-3>
-        <h1>Noun Public Domain Icon Search</h1>
-      </v-flex>
-      <SearchInput v-model="searchString" :loading="loading" />
-      <v-container fluid grid-list-xl>
-        <v-layout row wrap>
-          <IconCard v-for="icon in iconList" :key="icon.id" :iconData="icon" />
-        </v-layout>
-      </v-container>
-    </v-layout>
-  </v-container>
+  <div>
+    <NounKeyInput :error="error" />
+    <v-container class="noun-search">
+      <v-layout row wrap>
+        <v-flex xs12 text-xs-center my-3>
+          <h1>Noun Public Domain Icon Search</h1>
+        </v-flex>
+        <SearchInput v-model="searchString" :loading="loading" />
+        <v-flex xs12 md8 offset-md2 mt-2>
+          <v-alert v-model="error" color="error" icon="warning" outline>
+            Unable to get list of icons. Review and correct your API keys.
+          </v-alert>
+          <v-alert
+            v-model="noResults"
+            color="warning"
+            icon="priority_high"
+            outline
+          >
+            No results for term "{{ searchString }}" were found.
+          </v-alert>
+        </v-flex>
+        <v-container fluid grid-list-xl>
+          <v-layout row wrap mt-2>
+            <IconCard
+              v-for="icon in iconList"
+              :key="icon.id"
+              :iconData="icon"
+            />
+          </v-layout>
+        </v-container>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
-import debounce from "debounce";
+import { debounce } from "debounce";
 
 import SearchInput from "./SearchInput";
 import IconCard from "./IconCard";
+import NounKeyInput from "./NounKeyInput";
 
 export default {
   name: "NounIconSearch",
   components: {
     SearchInput,
-    IconCard
+    IconCard,
+    NounKeyInput
   },
   data() {
     return {
-      searchString: "Beer",
-      loading: true,
+      error: false,
+      noResults: false,
+      searchString: "",
+      loading: false,
       iconList: []
     };
   },
@@ -45,17 +69,39 @@ export default {
   },
   methods: {
     getIconList() {
+      this.noResults = false;
+      this.error = false;
+      if (!sessionStorage.apiKey || !sessionStorage.secret) {
+        this.error = true;
+        return;
+      }
       this.loading = true;
       this.iconList = [];
       debounce(
-        this.axios
-          .get(`/api/search_icons/${encodeURIComponent(this.searchString)}`)
-          .then(response => {
-            this.iconList = response.data.icons;
-            this.loading = false;
-          }),
-        500
-      );
+        () =>
+          this.axios
+            .get(`/icons/${encodeURIComponent(this.searchString)}`, {
+              params: {
+                limit_to_public_domain: 1
+              }
+            })
+            .then(response => {
+              this.iconList = response.data.icons;
+            })
+            .catch(error => {
+              if (error.response.status === 404) {
+                this.noResults = true;
+              } else {
+                this.error = true;
+              }
+              return Promise.reject(error);
+            })
+            .finally(() => {
+              this.loading = false;
+            }),
+        700,
+        true
+      )();
     }
   }
 };
