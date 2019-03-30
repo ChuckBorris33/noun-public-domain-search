@@ -1,10 +1,10 @@
 <template>
   <v-toolbar>
     <v-layout row wrap align-center justify-center fill-height>
-      <v-flex px-2 xs3>
+      <v-flex px-2 xs5 md3>
         <v-text-field v-model="key" label="Key" single-line :error="error" />
       </v-flex>
-      <v-flex xs3 px-2>
+      <v-flex px-2 xs5 md3>
         <v-text-field
           v-model="secret"
           label="Secret"
