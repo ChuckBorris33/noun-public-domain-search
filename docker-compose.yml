@@ -16,4 +16,4 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./docker/nginx/conf.d/web.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/conf.d/noun_development.conf:/etc/nginx/conf.d/default.conf
