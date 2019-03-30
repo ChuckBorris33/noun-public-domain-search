@@ -1,0 +1,19 @@
+version: '2'
+services:
+  backend:
+    build: ./backend
+    ports:
+     - "5000:5000"
+    working_dir: /usr/src/app
+    volumes:
+     - ./backend:/usr/src/app
+    command: "bash run_backend.sh"
+  web:
+    build: .
+    ports:
+     - "8080:8080"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    command: "yarn serve"

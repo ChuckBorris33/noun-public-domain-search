@@ -26,3 +26,9 @@ in `backend/run_backend.sh` file.
 yarn run backend
 yarn run serve
 ```
+
+## Run as docker container
+
+```
+docker-compose up
+```

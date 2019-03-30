@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export FLASK_APP=backend/api.py
+export FLASK_APP=api.py
 export FLASK_DEBUG=1
 
 export NOUN_KEY="YOUR_KEY_HERE"
 export NOUN_SECRET="YOUR_SECRET_HERE"
 
-flask run
+flask run --host=0.0.0.0
