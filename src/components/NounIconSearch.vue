@@ -75,7 +75,6 @@ export default {
   methods: {
     getIconList() {
       this.noResults = false;
-      this.error = false;
       if (!sessionStorage.apiKey || !sessionStorage.secret) {
         this.error = true;
         return;
@@ -93,12 +92,16 @@ export default {
         })
         .then(response => {
           this.iconList = response.data.icons;
+          this.noResults = false;
+          this.error = false;
         })
         .catch(error => {
           if (error.response.status === 404) {
+            this.error = false;
             this.noResults = true;
           } else {
             this.error = true;
+            this.noResults = false;
           }
           return Promise.reject(error);
         })
