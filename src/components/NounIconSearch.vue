@@ -54,7 +54,9 @@ export default {
       noResults: false,
       searchString: "",
       loading: false,
-      iconList: []
+      iconList: [],
+      searchQuery: Promise.resolve(),
+      debouncedFetchIconList: null
     };
   },
   watch: {
@@ -67,6 +69,9 @@ export default {
       }
     }
   },
+  created() {
+    this.debouncedFetchIconList = debounce(this.fetchIconList, 300); // Debounce while typing
+  },
   methods: {
     getIconList() {
       this.noResults = false;
@@ -77,31 +82,29 @@ export default {
       }
       this.loading = true;
       this.iconList = [];
-      debounce(
-        () =>
-          this.axios
-            .get(`/icons/${encodeURIComponent(this.searchString)}`, {
-              params: {
-                limit_to_public_domain: 1
-              }
-            })
-            .then(response => {
-              this.iconList = response.data.icons;
-            })
-            .catch(error => {
-              if (error.response.status === 404) {
-                this.noResults = true;
-              } else {
-                this.error = true;
-              }
-              return Promise.reject(error);
-            })
-            .finally(() => {
-              this.loading = false;
-            }),
-        700,
-        true
-      )();
+      this.searchQuery.finally(this.debouncedFetchIconList); // Avoid fetching new list before last fetch was completed
+    },
+    fetchIconList() {
+      this.searchQuery = this.axios
+        .get(`/icons/${encodeURIComponent(this.searchString)}`, {
+          params: {
+            limit_to_public_domain: 1
+          }
+        })
+        .then(response => {
+          this.iconList = response.data.icons;
+        })
+        .catch(error => {
+          if (error.response.status === 404) {
+            this.noResults = true;
+          } else {
+            this.error = true;
+          }
+          return Promise.reject(error);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     }
   }
 };
