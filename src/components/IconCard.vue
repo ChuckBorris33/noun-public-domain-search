@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs2 text-xs-center>
+  <v-flex xs2 text-center>
     <a :href="getLink(iconData.permalink)" target="_blank">
       <img
         :src="iconData.preview_url"

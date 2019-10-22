@@ -3,19 +3,19 @@
     <NounKeyInput :error="error" />
     <v-container class="noun-search">
       <v-layout row wrap>
-        <v-flex xs12 text-xs-center my-3>
+        <v-flex xs12 text-center my-3>
           <h1>Noun Public Domain Icon Search</h1>
         </v-flex>
         <SearchInput v-model="searchString" :loading="loading" />
         <v-flex xs12 md8 offset-md2 mt-2>
-          <v-alert v-model="error" color="error" icon="warning" outline>
+          <v-alert v-model="error" color="error" icon="warning" outlined>
             Unable to get list of icons. Review and correct your API keys.
           </v-alert>
           <v-alert
             v-model="noResults"
             color="warning"
             icon="priority_high"
-            outline
+            outlined
           >
             No results for term "{{ searchString }}" were found.
           </v-alert>

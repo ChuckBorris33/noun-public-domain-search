@@ -15,7 +15,7 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn
-            flat
+            text
             icon
             color="grey"
             v-on="on"

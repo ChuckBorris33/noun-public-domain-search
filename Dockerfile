@@ -1,11 +1,3 @@
-FROM node:8
-
-WORKDIR /home/node/app
-
-COPY . .
-
-RUN yarn install
+FROM node:10
 
 EXPOSE 8080
-
-CMD [ "yarn", "serve" ]

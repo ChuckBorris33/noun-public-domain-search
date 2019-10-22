@@ -4,7 +4,7 @@
       v-model="searchString"
       prepend-inner-icon="search"
       placeholder="Enter search term"
-      outline
+      outlined
       single-line
       hide-details
     >
