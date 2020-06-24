@@ -2,7 +2,7 @@
 
 Simple single page application that allows search for public domain icons in [The noun project](https://thenounproject.com)
 
-You can try this project at https://publicnoun.borko.rocks/
+You can try this project at https://publicnoun.zalman.online/
 
 <img width="1079" alt="Screenshot 2019-03-30 at 22 06 51" src="https://user-images.githubusercontent.com/3428126/55281719-f9755100-5338-11e9-82af-f443c93847aa.png">
 
