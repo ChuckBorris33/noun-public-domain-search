@@ -25,12 +25,12 @@ export default {
   props: {
     value: {
       type: String,
-      required: true
+      required: true,
     },
     loading: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {};
@@ -42,8 +42,8 @@ export default {
       },
       set(value) {
         this.$emit("input", value);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

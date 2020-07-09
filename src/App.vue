@@ -12,7 +12,7 @@ import NounIconSearch from "./components/NounIconSearch";
 export default {
   name: "app",
   components: {
-    NounIconSearch
-  }
+    NounIconSearch,
+  },
 };
 </script>

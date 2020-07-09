@@ -23,13 +23,13 @@ export default {
   props: {
     iconData: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     getLink(relativeUrl) {
       return `https://thenounproject.com${relativeUrl}`;
-    }
-  }
+    },
+  },
 };
 </script>

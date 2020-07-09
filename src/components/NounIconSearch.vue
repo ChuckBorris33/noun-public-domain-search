@@ -46,7 +46,7 @@ export default {
   components: {
     SearchInput,
     IconCard,
-    NounKeyInput
+    NounKeyInput,
   },
   data() {
     return {
@@ -56,7 +56,7 @@ export default {
       loading: false,
       iconList: [],
       searchQuery: Promise.resolve(),
-      debouncedFetchIconList: null
+      debouncedFetchIconList: null,
     };
   },
   watch: {
@@ -66,8 +66,8 @@ export default {
         if (value.length > 2) {
           this.getIconList();
         }
-      }
-    }
+      },
+    },
   },
   created() {
     this.debouncedFetchIconList = debounce(this.fetchIconList, 300); // Debounce while typing
@@ -87,15 +87,15 @@ export default {
       this.searchQuery = this.axios
         .get(`/icons/${encodeURIComponent(this.searchString)}`, {
           params: {
-            limit_to_public_domain: 1
-          }
+            limit_to_public_domain: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           this.iconList = response.data.icons;
           this.noResults = false;
           this.error = false;
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.response.status === 404) {
             this.error = false;
             this.noResults = true;
@@ -108,7 +108,7 @@ export default {
         .finally(() => {
           this.loading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>

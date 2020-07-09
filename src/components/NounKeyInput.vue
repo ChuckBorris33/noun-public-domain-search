@@ -38,14 +38,14 @@ export default {
   props: {
     error: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       interceptor: null,
       key: "",
-      secret: ""
+      secret: "",
     };
   },
   mounted() {
@@ -67,7 +67,7 @@ export default {
       if (this.key && value) {
         this.setAuth();
       }
-    }
+    },
   },
   methods: {
     setAuth() {
@@ -78,7 +78,7 @@ export default {
     },
     openNounDeveloperSite() {
       window.open("https://thenounproject.com/developers/", "_blank");
-    }
-  }
+    },
+  },
 };
 </script>
