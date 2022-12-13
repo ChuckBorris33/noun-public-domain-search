@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: "node:10"
+    image: "node:lts"
     user: "node"
     working_dir: /home/node/app
     volumes:
@@ -12,7 +12,7 @@ services:
     expose:
       - "8080"
   nginx:
-    image: nginx:1.14
+    image: nginx
     ports:
       - "8080:8080"
     volumes:
